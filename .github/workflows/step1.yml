@@ -22,12 +22,12 @@ jobs:
         text_out: ${{ steps.calc.outputs.text_out }}
         number_out: ${{ steps.calc.outputs.number_out }}
      steps:
-        - id: calc
-          shell: bash
-          run: |
-              TEXT="${{ inputs.text_in }}"
-              NUM=${{ inputs.number_in }}
-              NEW_TEXT="${TEXT}-${NUM}"
-              NEW_NUM=$(( NUM * 2 ))
-              echo "text_out=$NEW_TEXT" >> "$GITHUB_OUT"
-              echo "number_out=$NEW_NUM" >> "$GITHUB_OUT"
+      - id: calc
+        shell: bash
+        run: |
+          TEXT="${{ inputs.text }}"
+          NUM=${{ inputs.number }}
+          NEW_TEXT="${TEXT}-${NUM}"
+          NEW_NUM=$(( NUM * 2 ))
+          echo "text_out=$NEW_TEXT"   >> "$GITHUB_OUTPUT"
+          echo "number_out=$NEW_NUM" >> "$GITHUB_OUTPUT"
