@@ -24,13 +24,15 @@ jobs:
         text_out: ${{ steps.calc.outputs.text_out }}
         number_out: ${{ steps.calc.outputs.number_out }}
      steps:
-        - id: calc
-          shell: bash
-          run: |
-              TEXT="${{ inputs.text_in }}"
-              NUM=${{ inputs.number_in }}
-              echo "### Resultado Final" >> "$GITHUB_STEP_SUMMARY" 
-              echo "- Texto Final: $TEXT" >> "$GITHUB_STEP_SUMMARY"
-              echo "- Número Final: $NUM" >> "$GITHUB_STEP_SUMMARY"
-              echo "text_out=$TEXT" >> "$GITHUB_OUT"
-              echo "number_out=$NUM" >> "$GITHUB_OUT"
+      - id: finish
+        shell: bash
+        run: |
+          TEXT="${{ inputs.text }}"
+          NUM=${{ inputs.number }}
+          FINAL_TEXT="FINAL:${TEXT}"
+          FINAL_NUM=$(( NUM + 10 ))
+          echo "### Resultado Final"           >> "$GITHUB_STEP_SUMMARY"
+          echo "- String: $FINAL_TEXT"         >> "$GITHUB_STEP_SUMMARY"
+          echo "- Número: $FINAL_NUM"          >> "$GITHUB_STEP_SUMMARY"
+          echo "text_out=$FINAL_TEXT"          >> "$GITHUB_OUTPUT"
+          echo "number_out=$FINAL_NUM"         >> "$GITHUB_OUTPUT"
