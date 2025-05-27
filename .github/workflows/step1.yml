@@ -2,14 +2,12 @@ name: W1 reutilizável - Adiciona ao texto e Dobra o número
 on:
  workflow_call:
   inputs:
-      text_in:
-        description: Texto de entrada
-        required: true
-        type: string
-      number_in:
-        description: Número de entrada
-        required: true
-        type: number
+   text_in:
+    required: true
+    type: string
+   number_in:
+    required: true
+    type: number
   outputs:
       text_out:
         description: Texto modificado
