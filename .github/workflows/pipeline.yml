@@ -2,36 +2,39 @@ name: Orquestrador encadeamento dos 4 steps
 on:
   workflow_dispatch:
     inputs:
-      text_in:
+      text:
         description: Texto inicial
         required: true
         type: string
-      number_in:
+      number:
         description: Número inicial
         required: true
         type: number
+
 jobs:
   step1:
     uses: ./.github/workflows/step1.yml
     with:
-      text_in: ${{ inputs.text_in }}
-      number_in: ${{ fromJson(inputs.number_in) }}
+      text:   ${{ inputs.text }}
+      number: ${{ fromJson(inputs.number) }}
+
   step2:
     needs: step1
     uses: ./.github/workflows/step2.yml
     with:
-      text_in: ${{ needs.step1.outputs.text_out }}
-      number_in: ${{ fromJson(needs.step1.outputs.number_out) }}
+      text:   ${{ needs.step1.outputs.text_out }}
+      number: ${{ fromJson(needs.step1.outputs.number_out) }}
+
   step3:
     needs: step2
     uses: ./.github/workflows/step3.yml
     with:
-      text_in: ${{ needs.step2.outputs.text_out }}
-      number_in: ${{ fromJson(needs.step2.outputs.number_out) }}
+      text:   ${{ needs.step2.outputs.text_out }}
+      number: ${{ fromJson(needs.step2.outputs.number_out) }}
+
   step4:
     needs: step3
     uses: ./.github/workflows/step4.yml
     with:
-      text_in: ${{ needs.step3.outputs.text_out }}
-      number_in: ${{ fromJson(needs.step3.outputs.number_out) }}
-      
+      text:   ${{ needs.step3.outputs.text_out }}
+      number: ${{ fromJson(needs.step3.outputs.number_out) }}
