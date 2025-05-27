@@ -29,10 +29,8 @@ jobs:
         run: |
           TEXT="${{ inputs.text }}"
           NUM=${{ inputs.number }}
-          FINAL_TEXT="FINAL:${TEXT}"
-          FINAL_NUM=$(( NUM + 10 ))
           echo "### Resultado Final"           >> "$GITHUB_STEP_SUMMARY"
-          echo "- String: $FINAL_TEXT"         >> "$GITHUB_STEP_SUMMARY"
-          echo "- Número: $FINAL_NUM"          >> "$GITHUB_STEP_SUMMARY"
-          echo "text_out=$FINAL_TEXT"          >> "$GITHUB_OUTPUT"
-          echo "number_out=$FINAL_NUM"         >> "$GITHUB_OUTPUT"
+          echo "- String: $TEXT"         >> "$GITHUB_STEP_SUMMARY"
+          echo "- Número: $NUM"          >> "$GITHUB_STEP_SUMMARY"
+          echo "text_out=$TEXT"          >> "$GITHUB_OUTPUT"
+          echo "number_out=$NUM"         >> "$GITHUB_OUTPUT"
