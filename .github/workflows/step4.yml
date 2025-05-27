@@ -32,5 +32,5 @@ jobs:
               echo "### Resultado Final" >> "$GITHUB_STEP_SUMMARY" 
               echo "- Texto Final: $TEXT" >> "$GITHUB_STEP_SUMMARY"
               echo "- Número Final: $NUM" >> "$GITHUB_STEP_SUMMARY"
-              echo "text_out=$NEW_TEXT" >> "$GITHUB_OUT"
-              echo "number_out=$NEW_NUM" >> "$GITHUB_OUT"
+              echo "text_out=$TEXT" >> "$GITHUB_OUT"
+              echo "number_out=$NUM" >> "$GITHUB_OUT"
