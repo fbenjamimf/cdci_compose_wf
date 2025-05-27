@@ -1,0 +1,35 @@
+name: W1 reutilizável - Adiciona ao texto e Dobra o número
+on:
+ workflow_call:
+  inputs:
+      text_in:
+        description: Texto de entrada
+        required: true
+        type: string
+      number_in:
+        description: Número de entrada
+        required: true
+        type: number
+  outputs:
+      text_out:
+        description: Texto modificado
+        value: ${{ jobs.transform.outputs.text_out }}
+      number_out:
+        description: Número modificado
+        value: ${{  jobs.transform.outputs.number_out }}
+jobs:
+   transform:
+     runs-on: ubuntu-latest
+     outputs:
+        text_out: ${{ steps.calc.outputs.text_out }}
+        number_out: ${{ steps.calc.outputs.number_out }}
+     steps:
+        - id: calc
+          shell: bash
+          run: |
+              TEXT="${{ inputs.text_in }}"
+              NUM=${{ inputs.number_in }}
+              NEW_TEXT="${TEXT}-${NUM}"
+              NEW_NUM=$(( NUM * 2 ))
+              echo "text_out=$NEW_TEXT" >> "$GITHUB_OUT"
+              echo "number_out=$NEW_NUM" >> "$GITHUB_OUT"
