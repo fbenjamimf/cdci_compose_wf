@@ -1,12 +1,13 @@
-name: Orquestrador encadeamento dos 4 steps 
+name: Orchestrator – Encadeia 4 Steps
+
 on:
   workflow_dispatch:
     inputs:
-      text_in:
+      text:
         description: Texto inicial
         required: true
         type: string
-      number_in:
+      number:
         description: Número inicial
         required: true
         type: number
@@ -15,8 +16,8 @@ jobs:
   step1:
     uses: ./.github/workflows/step1.yml
     with:
-      text:   ${{ inputs.text_in }}
-      number: ${{ fromJson(inputs.number_in) }}
+      text:   ${{ inputs.text }}
+      number: ${{ fromJson(inputs.number) }}
 
   step2:
     needs: step1
