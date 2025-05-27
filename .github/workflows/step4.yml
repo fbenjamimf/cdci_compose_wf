@@ -1,4 +1,4 @@
-name: W4 reutilizável - Adiciona ao texto e Dobra o número
+name: W4 reutilizável - Sumariza
 on:
  workflow_call:
   inputs:
@@ -29,7 +29,8 @@ jobs:
           run: |
               TEXT="${{ inputs.text_in }}"
               NUM=${{ inputs.number_in }}
-              NEW_TEXT="${TEXT}-${NUM}"
-              NEW_NUM=$(( NUM * 2 ))
+              echo "### Resultado Final" >> "$GITHUB_STEP_SUMMARY" 
+              echo "- Texto Final: $TEXT" >> "$GITHUB_STEP_SUMMARY"
+              echo "- Número Final: $NUM" >> "$GITHUB_STEP_SUMMARY"
               echo "text_out=$NEW_TEXT" >> "$GITHUB_OUT"
               echo "number_out=$NEW_NUM" >> "$GITHUB_OUT"
